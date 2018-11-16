@@ -4,9 +4,7 @@ const app = express();
 
 app.use(express.static('../TurtleFactQuiz'));
 
-app.get('/test', (req, res, next) => {
-  res.send('Hello world');
-});
+app.use(require('./routes'));
 
 app.use((req, res) => {
   res.status(404)
