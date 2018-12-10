@@ -1,4 +1,5 @@
 const express = require('express');
+const { startDb } = require('./db');
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use((req, res) => {
     .send('Unknown Request');
 });
 
-app.listen(8080, () => {
-  console.log('App is listening on port 8080');
-});
+startDb()
+  .once('open', () => {
+    app.listen(8080, () => {
+      console.log('App is listening on port 8080');
+    });
+  });
